@@ -3,6 +3,17 @@
 Full Details about tsorter: 
 [http://www.terrill.ca/sorting/](http://www.terrill.ca/sorting/)
 
+## Create an HTML report
+
+[ConvertTo-Html](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/convertto-html) makes it easy to format your data for every website. The downside is that the output has a fixed format. But you can use javascript to change the sort-order with a click on the corresponding header.
+
+````
+$ReportFooter = "<script src=tsorter.min.js></script>"
+$ReportFooter += "<script src=demo.js></script>"
+
+$ReportData |  Select-Object "Id","Description","Amount","Data" | ConvertTo-Html -CSSUri demo.css -PostContent "$($ReportFooter)" | Out-File -Encoding utf8 "demo.html"
+````
+
 ## Specifying Data Types
 
 Different data types require different comparisons. Numbers in particular must be compared as numbers and not strings. To aid the script we can hint at the data type by specifying a `data-tsorter` attribute on the table header cell for each column. 
