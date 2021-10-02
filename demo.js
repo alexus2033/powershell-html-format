@@ -11,9 +11,15 @@ window.onload = () => {
     thead.appendChild(headerRow)
     dataTable.prepend(thead)
 
-    // Mark the first row as numeric so it sorts correctly
-    const numberRow = document.querySelector('#demo-table tr:nth-child(1)').querySelector(':nth-child(1)')
-    numberRow.setAttribute('data-tsorter', 'numeric')
+    // Mark the named columns as numeric so it sorts correctly
+    let numCols = ['Id', 'Amount'] //add more Names here!
+    const hd=Array.from(document.querySelectorAll('#mtab tr:nth-child(1) th'))
+    numCols.forEach(function(item) {
+        var col=hd.find(el => el.textContent === item);
+        if(col){
+            col.setAttribute("data-tsorter","numeric");
+        }
+    })
     
     // http://www.terrill.ca/sorting/
     // Make it sortable
