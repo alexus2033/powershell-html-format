@@ -25,5 +25,8 @@ $ReportHeader ="<div class='header'><h1>Sortable Report from PowerShell</h1></di
 $ReportFooter = "<script src=tsorter.min.js></script>"
 $ReportFooter += "<script src=demo.js></script>"
 
-# Create an HTML report
+# switch to script-folder
+Push-Location $PSScriptRoot
+
+# Create an HTML table and write it to "demo.html"
 $ReportData |  Select-Object "Id","Description","Amount","Data" | ConvertTo-Html -CSSUri demo.css -title "Sortable Table from PowerShell" -PreContent "$($ReportHeader)" -PostContent "$($ReportFooter)" | Out-File -Encoding utf8 "demo.html"
