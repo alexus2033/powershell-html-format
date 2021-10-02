@@ -13,7 +13,7 @@ window.onload = () => {
 
     // Mark the named columns as numeric so it sorts correctly
     let numCols = ['Id', 'Amount'] //add more Names here!
-    const hd=Array.from(document.querySelectorAll('#mtab tr:nth-child(1) th'))
+    const hd=Array.from(document.querySelectorAll('#demo-table tr:nth-child(1) th'))
     numCols.forEach(function(item) {
         var col=hd.find(el => el.textContent === item);
         if(col){
