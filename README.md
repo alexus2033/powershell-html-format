@@ -1,29 +1,21 @@
 # Powershell generated html-Table with dynamic sort-function
 
-tsorter
-JavaScript Table Sorter using in-place QuickSort.
-
-Full Details: 
+Full Details about tsorter: 
 [http://www.terrill.ca/sorting/](http://www.terrill.ca/sorting/)
-
-Provide the table ID and the initially sorted column (optional):
-
-```
- var sorter = tsorter.create( tableID, initialSortColumn );
-```
 
 ## Specifying Data Types
 
 Different data types require different comparisons. Numbers in particular must be compared as numbers and not strings. To aid the script we can hint at the data type by specifying a `data-tsorter` attribute on the table header cell for each column. 
 
 ````
-<thead>
-    <tr>
-         <th data-tsorter="numeric">Year</th>
-         <th data-tsorter="numeric">Population</th>
-         <th>Country</th>
-    </tr>
-</thead>
+window.onload = () => {
+    ...
+    // Mark the named columns as numeric so it sorts correctly
+    let numCols = ['Id', 'Amount'] //add more Names here!
+    ...
+    // Provide the table ID and the initially sorted column (optional)
+    const sorter = tsorter.create('demo-table', initialSortColumn)
+}
 ````
 
 If the `data-tsorter` attribute is omitted it will default to string comparison. 
