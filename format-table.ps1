@@ -7,7 +7,7 @@ for($x=1;$x -lt 101;$x++)
     # Create a string between 10 and 50 characters
     $limit=(Get-random -Minimum 10 -Maximum 50)
     $a=""
-    $word=""
+    $words=""
     # Let’s build the random content
     for($y=0;$y -lt $limit;$y++)
     {
@@ -15,10 +15,14 @@ for($x=1;$x -lt 101;$x++)
         $a=$a+[char][byte]((Get-Random -Minimum 32 64)+32)
 
     }
-    $amount=(Get-Random -Minimum -99.9 -Maximum 99.9)
-    $word=("wild","mad","small","heroic","minimal","elegant","clean","rotten","round","square","blue" | Get-Random)
-    $word+=" "+("player","forest","speaker","politican","manager","magician","hawk","dog","sound","fox" | Get-Random)
-    $ReportData.Add((New-Object PsObject -Property @{Id=$x;Description=$word;Amount=$amount;Data=$a;})) > $null;
+    # create numbers
+    $amount=(Get-Random -Minimum -88.9 -Maximum 88.9)
+    # create formatted dates
+    $date= "{0:D1}.{1:D2}.{2:D2}" -f (Get-Random -Minimum 1 -Maximum 28),(Get-Random -Minimum 1 -Maximum 12),(Get-Random -Minimum 1996 -Maximum 2023)
+    # create nice words
+    $words=("wild","mad","small","heroic","minimal","elegant","clean","rotten","round","square","blue","fantastic" | Get-Random)
+    $words+=" "+("player","forest","speaker","politican","manager","magician","hawk","dog","sound","fox" | Get-Random)
+    $ReportData.Add((New-Object PsObject -Property @{Id=$x;Date=$date;Description=$words;Amount=$amount;Data=$a;})) > $null;
 }
 
 $ReportHeader ="<div class='header'><h1>Sortable Report from PowerShell</h1></div>"
@@ -29,4 +33,4 @@ $ReportFooter += "<script src=demo.js></script>"
 Push-Location $PSScriptRoot
 
 # Create an HTML table and write it to "demo.html"
-$ReportData |  Select-Object "Id","Description","Amount","Data" | ConvertTo-Html -CSSUri demo.css -title "Sortable Table from PowerShell" -PreContent "$($ReportHeader)" -PostContent "$($ReportFooter)" | Out-File -Encoding utf8 "demo.html"
+$ReportData |  Select-Object "Id","Date","Description","Amount","Data" | ConvertTo-Html -CSSUri demo.css -title "Sortable Table from PowerShell" -PreContent "$($ReportHeader)" -PostContent "$($ReportFooter)" | Out-File -Encoding utf8 "demo.html"
