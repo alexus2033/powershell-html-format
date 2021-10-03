@@ -20,21 +20,28 @@ window.onload = () => {
             col.setAttribute("data-tsorter","numeric");
         }
     })
-    let datCols = ['Date']
-    datCols.forEach(function(item) {
-        var col=hd.find(el => el.textContent === item);
-        if(col){
-            col.setAttribute("data-tsorter","date-time");
-        }
-    })
+    var col=hd.find(el => el.textContent === 'Address');
+    if(col){
+        col.setAttribute("data-tsorter","ip");
+    }
+    var col=hd.find(el => el.textContent === 'Date');
+    if(col){
+        col.setAttribute("data-tsorter","date-time");
+    }
 
     // http://www.terrill.ca/sorting/
-    // Make dates sortable
+    // Make ip-addresses sortable
     const sorter = tsorter.create('demo-table', 0, {
-        'date-time': function(row){ 
-        var dt =  this.getCell(row).firstChild.nodeValue.toLowerCase();
-        var pattern = /(\d{1,2})\.(\d{1,2})\.(\d{2,4})/;
-        return dt.replace(pattern,'$3-$2-$1');
+        'ip': function(row){ 
+        var ip =  this.getCell(row).firstChild.nodeValue.toLowerCase();
+        return ip.split(".").map(function(x) {
+            return pad(x);
+            }).join(".");
         }
      })
+}
+
+function pad(num) {
+    var s = "000" + num;
+    return s.substr(s.length-3);
 }
