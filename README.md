@@ -39,6 +39,7 @@ If the `data-tsorter` attribute is omitted it will default to string comparison.
 |  numeric  | Treats the table cell value as an integer or float  |
 | link | Parses the text content of a link tag inside the table cell |
 | input | Parses an input tag's value inside the table cell |
+| date-time | useful for formatted date/time values like "dd.mm.yyyy" |
 | default | by default the textContent of the table cell is used and compared as text |
 
 ## Custom Data Accessor
@@ -53,4 +54,4 @@ It is possible to define your own data accessors. This is particularly useful wh
 });
 ```
 
-In the above example the 'image-number' type is now available to be used as a `data-tsorter` attribute value. It will access the text node that follows an image tag inside a cell. An example is available at [http://www.terrill.ca/sorting/table_sort_example.html](http://www.terrill.ca/sorting/table_sort_example.html).
+In the above example the 'image-number' type is now available to be used as a `data-tsorter` attribute value. It will access the text node that follows an image tag inside a cell. Examples are available at [jsfiddle](https://jsfiddle.net/und6tfez/2/) or [http://www.terrill.ca/sorting/table_sort_example.html](http://www.terrill.ca/sorting/table_sort_example.html).
