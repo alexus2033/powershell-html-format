@@ -31,17 +31,13 @@ window.onload = () => {
 
     // http://www.terrill.ca/sorting/
     // Make ip-addresses sortable
-    const sorter = tsorter.create('demo-table', 0, {
+    tsorter.create('demo-table', 0, {
         'ip': function(row){ 
         var ip =  this.getCell(row).firstChild.nodeValue.toLowerCase();
         return ip.split(".").map(function(x) {
-            return pad(x);
+        var s = "000" + x; //fill with leading zeros
+        return s.substr(s.length-3);
             }).join(".");
         }
-     })
-}
-
-function pad(num) {
-    var s = "000" + num;
-    return s.substr(s.length-3);
+    })
 }
