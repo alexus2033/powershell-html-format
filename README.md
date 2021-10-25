@@ -44,14 +44,20 @@ If the `data-tsorter` attribute is omitted it will default to string comparison.
 
 ## Custom Data Accessor
 
-It is possible to define your own data accessors. This is particularly useful when there is custom HTML inside a table cell. 
+It is possible to define your own data accessors. This is particularly useful when there is custom Data-Format inside a table cell. 
 
 ```
- var sorter = tsorter.create('table-id', 0, {
-     'image-number': function(row){  
-         return parseFloat( this.getCell(row).childNodes[1].nodeValue, 10 );
-     }
-});
+ // Make ip-addresses sortable
+    tsorter.create('demo-table', 0, {
+        'ip': function(row){ 
+        var ip =  this.getCell(row).firstChild.nodeValue.toLowerCase();
+        return ip.split(".").map(function(x) {
+        var s = "000" + x; //fill with leading zeros
+        return s.substr(s.length-3);
+            }).join(".");
+        }
+    })
 ```
 
-In the above example the 'image-number' type is now available to be used as a `data-tsorter` attribute value. It will access the text node that follows an image tag inside a cell. Examples are available at [jsfiddle](https://jsfiddle.net/und6tfez/2/) or [http://www.terrill.ca/sorting/table_sort_example.html](http://www.terrill.ca/sorting/table_sort_example.html).
+In the above example the 'ip' type is now available to be used as a `data-tsorter` attribute value.
+More examples are available at [jsfiddle.net](https://jsfiddle.net/und6tfez/2/) or [http://www.terrill.ca/sorting/table_sort_example.html](http://www.terrill.ca/sorting/table_sort_example.html).
